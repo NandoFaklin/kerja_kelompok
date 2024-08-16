@@ -2,17 +2,25 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\api\ApiController;
 use App\Http\Controllers\api\ApiKelompokController;
 use App\Http\Controllers\api\ApiAnggotaController;
 use App\Http\Controllers\api\ApiTaskController;
+use App\Http\Controllers\api\ApiControllerAdmin;
+
 
 
 //=================AUTH========================//
 //register
-Route::post('Register',[ApiController::class,"Register"]);
+Route::post('Register',[ApiControllerAdmin::class,"registerValidasi"]);
 //login
 Route::post('Login',[ApiController::class,"Login"]);
+//loginadmin
+Route::post('LoginAdmin',[ApiController::class,"adminLogin"]);
+//showuser
+Route::get('Showalluser',[ApiController::class,"showuser"]);
+//deleteuser
+Route::post('Deleteuser',[ApiController::class,"deleteUser"]);
 //profile and logout bearer
 Route::group([
     "middleware" => ["auth:sanctum"]
@@ -28,6 +36,16 @@ Route::post('checkEmail',[ApiController::class,"checkEmail"]);
 //show by nim
 Route::get('showuserbynim', [ApiController::class, "showUserByNimOrNip"]);
 //=================AUTH========================//
+
+//=================Admin=====================//
+//show validasi user
+Route::get('ShowValidasiUser',[ApiControllerAdmin::class,"getAllValidasiUsers"]);
+//validasi
+Route::post('ValidasiUser',[ApiController::class,"validasi"]);
+//delete validasi
+Route::post('DeleteValidasi',[ApiControllerAdmin::class,"deleteValidasi"]);
+
+//=================Admin=====================//
 
 
 //=================Kelompok===================//
